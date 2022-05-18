@@ -9,12 +9,21 @@ use App\Models\ladder_problem;
 use DB;
 class Ladder_ProblemController extends Controller
 {
+    public function exploreALadder($id)
+    {
+        $problems = DB::table('ladders')->where('ladders.id', $id)
+            ->join('ladder_problem', 'ladders.id', '=', 'ladder_problem.ladderId')
+            ->join('problems', 'problems.id', '=', 'ladder_problem.problemId')
+            ->select('problems.number','problems.letter','problems.name')
+            ->get();
+        $ladder = DB::table('ladders')->where('id',$id)->select('name')->get()->toArray();
+        $ladderName =$ladder[0]->name;
+        return view('ladderproblems',compact('problems','ladderName'));
+    }
     public function store(Request $request)
     {
         $ladderName = $request->laddername;
         $ladder =  Ladder::where('name',$ladderName)->get()->toArray();
-        //dd();
-        
 
         $data = $request->problemnumber;
         $data = str_split($data);
@@ -41,10 +50,7 @@ class Ladder_ProblemController extends Controller
                          "ladderId" => $ladder[0]["id"]
                     ]
                 );
-            // ladder_problem::create([
-            //     'problemId' => $problem[0]["id"]  ,
-            //      "ladderId" => $ladder[0]["id"]
-            // ],' ladder_problem');
+                return back();
         }
 
 

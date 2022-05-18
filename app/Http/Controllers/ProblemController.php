@@ -14,39 +14,26 @@ class ProblemController extends Controller
     {
         return view('problemcreate');
     }
-    public function getAllProblems()
+    public function updateproblemset()
     {
         $data= Http::get("https://codeforces.com/api/problemset.problems")->json();
-        dd($data);
+        $numberOfProblems = Problem::all()->count();
+        dd($numberOfProblems);
+        $count=0;
         foreach($data['result']['problems'] as $p)
-        {    
+        {   
+            if($count > $numberOfProblems-1 )
             $prlm=[
                 "number" => $p["contestId"],
                 "letter" => $p['index'],
                 "name" => $p['name']
             ];
+            $count++;
             Problem::create($prlm);
         
         }
     }
 
-    public function store(Request $request)
-    {
-        $data = $request->problemnumber;
-        $problemLetter = "";
-        $problemNumber = '';
-        foreach ($data as $value) {
-            if($value>='a'&&$value <='z')
-            $problemNumber .= "$value,";
-            else 
-            $problemLetter .= "$value,";
-            
-        }
-        $data = $request->except('_token');
-        // dd($data);
-        Problem::create($data);
-        session()->flash('success', trans('Created Successfully'));
-        
-    }
+    
     
 }

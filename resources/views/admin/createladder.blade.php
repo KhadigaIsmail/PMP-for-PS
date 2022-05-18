@@ -11,7 +11,7 @@
     <body class="bg-gray-200">
   
         <a href="{{route('create')}}">Main</a>
-        <a href="{{ route('viewstoreproblemtoladder') }}">Add problem to ladder</a>
+        <a href="{{ route('addproblemtoladder') }}">Add problem to ladder</a>
         <a href="{{ route('create') }}">Update Problemset</a>
         
         <h3>Please Write Ladder name</h3>

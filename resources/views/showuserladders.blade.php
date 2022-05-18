@@ -4,17 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>First Project</title>
+        <title>PMP for PS</title>
 
        
     </head>
     <body class="bg-gray-200">
-        <a href="{{ route('addproblemtoladder') }}">Add problem to ladder</a>
-        <a href="{{ route('viewaddladder') }}">Add Ladder</a>
-        <a href="{{ route('create') }}">Update Problemset</a>
-        
-       
+        <div>
+            <a href="">Your Ladders</a>
+            <a href="">Explore Ladders</a>
             
-           
+        </div>
     </body>
 </html>

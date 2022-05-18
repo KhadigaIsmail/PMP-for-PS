@@ -22,18 +22,30 @@ use App\http\Controllers\Ladder_ProblemController;
 */
 
 
-Route::view('/', 'layouts.app')->name('index');
-//  Route::DELETE('/delete/{id}',[OrderController::class, 'destroy'])->name('delete');
+Route::view('/', 'index')->name('index');
+Route::get('/exploreladders',[LadderController::class,'index'])->name('exploreladders');
+Route::get('/ladders/{id}',[Ladder_ProblemController::class,'exploreALadder'])->name('exploreladderid');
 
+// Route::get('/ladders',[])->name('userladders');
+// Route::POST('/joinladder',[])->name('joinladder');
+
+
+//Route::DELETE('/delete/{id}',[OrderController::class, 'destroy'])->name('delete');
+//-----------------Admin----------------//
 Route::POST('/',[problemsController::class,'index'])->name('showproblems');
 ROUTE::view('/admin','admin.create')->name('create');
 ROUTE::view('/admin/storeladder','admin.createladder')->name('viewaddladder');
-ROUTE::view('/admin/storeproblemtoladder','admin.addproblemtoladder')->name('viewstoreproblemtoladder');
-
-Route::POST('/admin/storeproblem',[problemController::class,'store'])->name('storeproblem');
+ROUTE::get('/admin/addproblemtoladder',[LadderController::class,'getladders'],'admin.addproblemtoladder')->name('addproblemtoladder');
 Route::POST('/admin/storeladder',[LadderController::class,'store'])->name('storeladder');
-Route::POST('/admin/storeproblemtoladder',[Ladder_ProblemController::class,'store'])->name('storeproblemtoladder');
+Route::POST('/admin/addproblemtoladder',[Ladder_ProblemController::class,'store'])->name('addproblemtoladder');
+ROUTE::get('/admin/updateproblemset',[ProblemController::class,'updateproblemset'])->name('updateproblemset');
 
-ROUTE::get('/loadProblemset',[ProblemController::class,'getAllProblems']);
+
+//-----------Login Register Logout------------//
+Route::POST('/logout', [LogoutController::class, 'store'])->name('logout');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('login');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class,'store'])->name('register');
 
 

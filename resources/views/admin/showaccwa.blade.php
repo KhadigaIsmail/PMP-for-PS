@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>First Project</title>
+        <title>PMP for PS</title>
 
        
     </head>
@@ -12,7 +12,7 @@
         <nav class="p-6 bg-white flex justify-between mb-6">
             <form action="{{route('showproblems')}}" method="POST" >
                 @csrf
-                <h3>Please Enter Your Handel</h3>
+                <h3>Please Enter User Handel</h3>
                 <input name ="handel"type="text" >
             </form>
 
