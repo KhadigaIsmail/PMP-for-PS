@@ -9,8 +9,14 @@ use App\Models\ladder_problem;
 use DB;
 class Ladder_ProblemController extends Controller
 {
-    public function exploreALadder($id)
+    public function viewLadder($id)
     {
+        $userId = auth()->user()->id;
+        $userJoined = DB::table('ladders_users')->where('ladderId', $id)->where('usersId',$userId)->get();
+        if($userJoined != null)
+            $userJoined=1;
+        else $userJoined=0;
+
         $problems = DB::table('ladders')->where('ladders.id', $id)
             ->join('ladder_problem', 'ladders.id', '=', 'ladder_problem.ladderId')
             ->join('problems', 'problems.id', '=', 'ladder_problem.problemId')
@@ -18,7 +24,7 @@ class Ladder_ProblemController extends Controller
             ->get();
         $ladder = DB::table('ladders')->where('id',$id)->select('name')->get()->toArray();
         $ladderName =$ladder[0]->name;
-        return view('ladderproblems',compact('problems','ladderName'));
+        return view('ladderproblems',compact('problems','ladderName',));
     }
     public function store(Request $request)
     {

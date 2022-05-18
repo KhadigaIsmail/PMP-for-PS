@@ -16,7 +16,8 @@
                 <input name ="handel"type="text" placeholder="Codeforces Handel">
                 <label>Password:</label>
                 <input name ="password"type="text" placeholder="Password">
-                
+                <input type="checkbox" name="remember" id="remember">
+                <label for="remember">Remember me</label>
                 <button type="submit"></button>
             </form>
             <p>Don't have an account?</p>

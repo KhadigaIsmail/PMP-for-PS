@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>PMP for PS</title>
+@extends('layout.app')
 
-       
-    </head>
-    <body class="bg-gray-200">
+@section('content')
         <div>
             <a href="{{ route('exploreladders') }}">Your Ladders</a>
             <a href="{{ route('exploreladders') }}">Explore Ladders</a>
-            
+
+            <form action="{{route('showproblems')}}" method="POST" >
+                @csrf
+               <h3>Write your Handel</h3>
+                <input name ="handel"type="text" placeholder="Codeforces Handel">
+                
+                <button type="submit"></button>
+            </form>
         </div>
-    </body>
-</html>
+@endsection

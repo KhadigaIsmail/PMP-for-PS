@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 
 class problemsController extends Controller
 {
-     public function index(Request $request)
+    public function index(Request $request)
     {
         //dd(gettype($request->handel));
         $data= Http::get("https://codeforces.com/api/user.status?handle={$request->handel}");
@@ -35,16 +35,9 @@ class problemsController extends Controller
         foreach($data as  $d){
             $b=1;
             $name = $d["problem"]["name"];
-            foreach ($acc as $ac ){
-                if($ac == $name ){
-                    $b=0;
-                }       
-                if(Arr::exists($wa, $name)) $b=0;
-            }
-            if($b){
-                $wa[$name]=1;      
-            }
-
+            if(Arr::exists($acc, $name))  $b=0;
+            if(Arr::exists($wa, $name)) $b=0;
+            if($b) $wa[$name]=1;     
         }
         return view('problems',compact('acc','wa'));
     }
