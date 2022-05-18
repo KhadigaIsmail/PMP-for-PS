@@ -9,17 +9,12 @@
        
     </head>
     <body class="bg-gray-200">
-
+        <a href="{{ route('viewstoreproblemtoladder') }}">Add problem to ladder</a>
+        <a href="{{ route('viewaddladder') }}">Add Ladder</a>
+        <a href="{{ route('create') }}">Update Problemset</a>
         
-        <h3>ACCEPTED</h3>
-        @foreach ($acc as $key => $a )
-            <p color="green">{{ $key }}</p>  
-        @endforeach
-
-        <h3>Wrong Answer</h3>
-        @foreach ($wa as $key => $a )
-            <p>{{ $key }}</p>  
-        @endforeach
+       
             
+           
     </body>
 </html>
