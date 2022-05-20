@@ -14,10 +14,12 @@
                 @foreach ($ladders as $ladder)     
                 <li>
                     <a href="{{route('exploreladderid',$ladder->id) }}">{{ $ladder->name }}</a> 
+                    @if($ladder->joined==0)
                     <form method="POST" action="{{ route('joinladder',$ladder->id ) }}">
                         @csrf
                     <button>Join</button>    
                     </form>   
+                    @endif
                 </li>
                 @endforeach
             </ul>

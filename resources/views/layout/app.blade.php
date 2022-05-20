@@ -11,21 +11,29 @@
     <body class="bg-gray-200">
         <nav class="p-6 bg-white flex justify-between mb-6">
             <ul class="flex items-center">
-                <li>
-                    <a href="/" class="p-3">Home</a>
-                </li>
                 @auth
                 <li>
-                    <a href="/" class="p-3">Orders</a>
+                    <a href="{{ route('userladders') }}" class="p-3">Your Ladders</a>
                 </li>
                 @endauth
+                <li>
+                    <a href="{{ route('exploreladders') }}" class="p-3">Explore Ladders</a>
+                </li>
+                @auth
+                    @if(auth()->user()->admin == 1)
+                        <li>
+                            <a href="{{ route('create') }}" class="p-3">Admin</a>
+                        </li>
+                    @endif
+                @endauth
+                
                
             </ul>
 
             <ul class="flex items-center">
             @if(auth()->user())
                     <li>
-                        <a href="" class="p-3">{{auth()->user()->name}}</a>
+                        <a href="" class="p-3">{{auth()->user()->handel}}</a>
                     </li>
                     <li>
                         <form action="{{ route('logout') }}" method="post" class="p-3 inline">

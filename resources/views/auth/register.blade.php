@@ -13,13 +13,31 @@
             <form action="{{route('register')}}" method="POST" >
                 @csrf
                 <label>Codeforces:</label>
-                <input name ="handel"type="text" placeholder="Codeforces Handel">
+                <input name ="handel"type="text" placeholder="Codeforces Handel"  value="{{old('handel')}}">
+                @error('handel') 
+                <p>{{$message}}</p>
+                @enderror
+
+                <label>Email</label>
+                <input type="text" name="email" id="emil" placeholder="Your email" value="{{old('email')}}">
+                @error('email') 
+                <p>{{$message}}</p>
+                @enderror
+
                 <label>Password:</label>
                 <input name ="password"type="text" placeholder="Password">
+                @error('password') 
+                <p>{{$message}}</p>
+                @enderror
+
                 <label>Confirm Password:</label>
                 <input name ="password_confirmation"type="text" placeholder="Password">
-                <button type="submit">Submit</button>
+                @error('name') 
+                <p>{{$message}}</p>
+                @enderror
+                <button type="submit">Register</button>
             </form>
+            <p>Have an Account?</p><a href="{{ route('login') }}">Log in</a>
 
             
             

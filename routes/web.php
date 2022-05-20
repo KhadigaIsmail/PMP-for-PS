@@ -25,23 +25,23 @@ use App\http\Controllers\LadderUserController;
 */
 
 
-Route::view('/', 'index')->name('index');
+Route::get('/', [LadderUserController::class,'joinedRecently'])->name('index');
 Route::get('/exploreladders',[LadderController::class,'index'])->name('exploreladders');
 Route::get('/ladders/{id}',[Ladder_ProblemController::class,'viewLadder'])->name('exploreladderid');
 
-// Route::get('/ladders',[])->name('userladders');
+Route::get('/myladders',[LadderUserController::class,'userLadders'])->name('userladders');
 Route::POST('/joinladder/{id}',[LadderUserController::class,'store'])->name('joinladder');
 
+//Route::POST('/',[problemsController::class,'index'])->name('showproblems');
 
 //Route::DELETE('/delete/{id}',[OrderController::class, 'destroy'])->name('delete');
 //-----------------Admin----------------//
-Route::POST('/',[problemsController::class,'index'])->name('showproblems');
-ROUTE::view('/admin','admin.create')->name('create');
-ROUTE::view('/admin/storeladder','admin.createladder')->name('viewaddladder');
-ROUTE::get('/admin/addproblemtoladder',[LadderController::class,'getladders'],'admin.addproblemtoladder')->name('addproblemtoladder');
-Route::POST('/admin/storeladder',[LadderController::class,'store'])->name('storeladder');
-Route::POST('/admin/addproblemtoladder',[Ladder_ProblemController::class,'store'])->name('addproblemtoladder');
-ROUTE::get('/admin/updateproblemset',[ProblemController::class,'updateproblemset'])->name('updateproblemset');
+ROUTE::view('/admin','admin.create')->name('create')->middleware('admin');
+ROUTE::view('/admin/storeladder','admin.createladder')->name('viewaddladder')->middleware('admin');
+ROUTE::get('/admin/addproblemtoladder',[LadderController::class,'getladders'],'admin.addproblemtoladder')->name('addproblemtoladder')->middleware('admin');
+Route::POST('/admin/storeladder',[LadderController::class,'store'])->name('storeladder')->middleware('admin');
+Route::POST('/admin/addproblemtoladder',[Ladder_ProblemController::class,'store'])->name('addproblemtoladder')->middleware('admin');
+ROUTE::get('/admin/updateproblemset',[ProblemController::class,'updateproblemset'])->name('updateproblemset')->middleware('admin');
 
 
 //-----------Login Register Logout------------//

@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>First Project</title>
+@extends('layout.app')
 
-       
-    </head>
-    <body class="bg-gray-200">
-  
-        <a href="{{route('create')}}">Main</a>
-        <a href="{{ route('addproblemtoladder') }}">Add problem to ladder</a>
-        <a href="{{ route('create') }}">Update Problemset</a>
+@section('content')
+<div>
+
+    <a href="{{route('create')}}">Main</a>
+    <a href="{{ route('addproblemtoladder') }}">Add problem to ladder</a>
+    <a href="{{ route('create') }}">Update Problemset</a>
+    
+    <h3>Please Write Ladder name</h3>
+    <form method="post" action="{{ route('storeladder') }}">
+        @csrf
         
-        <h3>Please Write Ladder name</h3>
-        <form method="post" action="{{ route('storeladder') }}">
-            @csrf
-            
-            <input type="text" name="laddername">
-        </form>
-    </body>
-</html>
+        <input type="text" name="laddername">
+        <textarea placeholder="Ladder Description"></textarea>
+        <button type="submit">Add Ladder</button>
+    </form>
+</div>
+@endsection

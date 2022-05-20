@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Arr;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
@@ -81,20 +82,30 @@ class RegisterController extends Controller
     }
     public function store(Request $request)
     {
+        
         $this->validate($request,
         [
+            'email' =>'required|email',
             'handel' => 'required|max:255',
             'password' =>'required|confirmed',
 
         ]);
-       
+        
+        $validhandel= Http::get("https://codeforces.com/api/user.info?handles={$request->handel}");
+        if($validhandel["status"]!="OK")
+        {
+            return Redirect::back()->withErrors(['handel' => 'Handel Does Not Exist']);
+        }
+        
         User::create([
             'handel' => $request->handel,
+            'email' => $request->email,
             'password'=> Hash::make($request->password),
             'admin'=>false,
             
         ]);
-        auth()->attempt($request->only('handel','password')); //sign in user
+        
+        auth()->attempt($request->only('email','password')); //sign in user
         $this->loadUserProblems($request->handel ,auth()->user()->id);
         return redirect()->route('index');
     }

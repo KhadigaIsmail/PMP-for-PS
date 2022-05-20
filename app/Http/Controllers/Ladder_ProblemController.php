@@ -12,19 +12,23 @@ class Ladder_ProblemController extends Controller
     public function viewLadder($id)
     {
         $userId = auth()->user()->id;
-        $userJoined = DB::table('ladders_users')->where('ladderId', $id)->where('usersId',$userId)->get();
-        if($userJoined != null)
+        $userJoined = DB::table('ladders_users')->where('ladderId', $id)->where('userId',$userId)->get();
+        $userJoined = $userJoined->toArray();
+        
+        if(count($userJoined) == 0 )
+            $userJoined=0;
+        else 
             $userJoined=1;
-        else $userJoined=0;
 
         $problems = DB::table('ladders')->where('ladders.id', $id)
             ->join('ladder_problem', 'ladders.id', '=', 'ladder_problem.ladderId')
             ->join('problems', 'problems.id', '=', 'ladder_problem.problemId')
             ->select('problems.number','problems.letter','problems.name')
             ->get();
-        $ladder = DB::table('ladders')->where('id',$id)->select('name')->get()->toArray();
-        $ladderName =$ladder[0]->name;
-        return view('ladderproblems',compact('problems','ladderName',));
+        
+            $ladder = DB::table('ladders')->where('id',$id)->select('name','id','description')->get()->toArray();
+        $ladder =$ladder[0];
+        return view('ladderproblems',compact('problems','ladder','userJoined'));
     }
     public function store(Request $request)
     {

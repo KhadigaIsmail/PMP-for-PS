@@ -22,6 +22,7 @@ class User extends Authenticatable
         'handel',
         'admin',
         'password',
+        'email'
     ];
     public function users()
     {

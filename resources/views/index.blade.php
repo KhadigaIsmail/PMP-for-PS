@@ -2,15 +2,20 @@
 
 @section('content')
         <div>
-            <a href="{{ route('exploreladders') }}">Your Ladders</a>
-            <a href="{{ route('exploreladders') }}">Explore Ladders</a>
-
-            <form action="{{route('showproblems')}}" method="POST" >
-                @csrf
-               <h3>Write your Handel</h3>
-                <input name ="handel"type="text" placeholder="Codeforces Handel">
-                
-                <button type="submit"></button>
-            </form>
+            @auth
+                <div>
+                    @auth
+                        <h1>Recent Joind Ladder</h1>
+                        @foreach ($recentlyJoinedLadders as $ladder )
+                            <a  href="{{route('exploreladderid',$ladder->id) }}">{{ $ladder->name}}</a>
+                        @endforeach
+                    @endauth
+                </div>
+                @endauth
+                @guest
+                <div>
+                    <h1>Why Does This Site Exist</h1>   
+                </div>
+            @endguest
         </div>
 @endsection

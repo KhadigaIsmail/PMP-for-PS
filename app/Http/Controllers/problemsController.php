@@ -20,11 +20,12 @@ class problemsController extends Controller
         $cnt = 0; 
         $acc=array();
     
-        
+        $accTags = [];
         foreach($data as  $d){
             if($d["verdict"]== "OK"){
                 if(!(Arr::exists($acc, $d["problem"]["name"])) )
                     $acc[$d["problem"]["name"]]= 1;
+                    $accTags[$d["problem"]["name"]]=$d["problem"]["tags"];
                
             }
         }
@@ -39,6 +40,6 @@ class problemsController extends Controller
             if(Arr::exists($wa, $name)) $b=0;
             if($b) $wa[$name]=1;     
         }
-        return view('problems',compact('acc','wa'));
+        return view('problems',compact('acc','wa','accTags'));
     }
 }

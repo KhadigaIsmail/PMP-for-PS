@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['guest']);
+    }
     public function index()
     {
         return view('auth.login');
@@ -15,11 +19,11 @@ class LoginController extends Controller
     {
         $this->validate($request,
         [
-            'handel' =>'required',
+            'email' =>'required',
             'password' =>'required'
         ]);
        
-        if(!auth()->attempt($request->only('handel','password'),$request->remember))
+        if(!auth()->attempt($request->only('email','password'),$request->remember))
         {
             return back()->with('status','invalid login details');
         } 

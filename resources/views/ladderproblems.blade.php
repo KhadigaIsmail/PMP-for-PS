@@ -10,7 +10,13 @@
     </head>
     <body class="bg-gray-200">
         <div>
-            <h3>{{ $ladderName }}</h3>
+            <h3>{{ $ladder->name }}</h3>
+            <p>{{ $ladder->description }}</p>
+            @if($userJoined == 0)
+                <form method="POST" action="{{ route('joinladder',$ladder->id ) }}">
+                    @csrf
+                <button>Join</button>  
+            @endif
             <ul>
                 @foreach ($problems as $problem)     
                 <li>
