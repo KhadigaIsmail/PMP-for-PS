@@ -26,7 +26,7 @@
                 <div class="mb-4">
                     <label class="sr-only">Password:</label>
                     
-                    <input name ="password"type="text" placeholder="Password"  
+                    <input name ="password"type="password" placeholder="Password"  
                     class="bg-gray-100 border-2 w-full p-4 rounded-lg ">
                     @error('password') 
                     <p>{{$message}}</p>
@@ -35,7 +35,7 @@
                 <div class="mb-4">
 
                     <label class="sr-only">Confirm Password:</label>
-                    <input name ="password_confirmation" type="text" placeholder="Password"  
+                    <input name ="password_confirmation" type="password" placeholder="Password"  
                     class="bg-gray-100 border-2 w-full p-4 rounded-lg ">
                     @error('name') 
                     <p>{{$message}}</p>

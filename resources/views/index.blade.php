@@ -3,11 +3,11 @@
 @section('content')
         <div>
             @auth
-                <div>
+                <div class=" justify-center">
                     @auth
-                        <h1>Recent Joind Ladder</h1>
+                        <h1 class="text-2xl font-bold m-3">Recent Joind Ladder</h1>
                         @foreach ($recentlyJoinedLadders as $ladder )
-                            <a  href="{{route('exploreladderid',$ladder->id) }}">{{ $ladder->name}}</a>
+                            <a  href="{{route('exploreladderid',$ladder->id) }}" class="m-8 text-cyan-600 text-center">{{ $ladder->name}}</a>
                         @endforeach
                     @endauth
                 </div>
