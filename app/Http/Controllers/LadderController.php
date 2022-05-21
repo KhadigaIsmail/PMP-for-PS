@@ -11,7 +11,7 @@ class LadderController extends Controller
     public  function index()
     {
         $ladders = Ladder::all();
-       
+       if(auth()->user()){
         $userladdersids = DB::table('users')->where('users.id', auth()->user()->id)
             ->join('ladders_users', 'users.id', '=', 'ladders_users.userId')
             ->join('ladders', 'ladders.id', '=', 'ladders_users.ladderId')
@@ -31,6 +31,8 @@ class LadderController extends Controller
                     
                 }
             }
+        }
+        
         
         return view('exploreladders',compact('ladders'));
     }

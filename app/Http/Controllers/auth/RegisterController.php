@@ -40,19 +40,22 @@ class RegisterController extends Controller
                 $p =  $d["problem"]["contestId"]. $d["problem"]["index"];
                 $problemLetter=$d["problem"]["index"];
                 $problemNumber=$d["problem"]["contestId"];
-                
+               
                 if(!(Arr::exists($acc, $p)) )
                 {
-                    $acc[$p]= 1;
                     $problemId = Problem::where('letter',$problemLetter)->where('number',$problemNumber)->get();
-                    $problemId = $problemId->toArray()[0]['id'];
-                    DB::table('problems_users')->insert(
-                    [
-                        'userId' => $userId  ,
-                        "problemId" => $problemId,
-                        'status' => 1
-                    ]
-                    );
+                    if(count($problemId->toArray())){
+
+                        $acc[$p]= 1;
+                        $problemId = $problemId->toArray()[0]['id'];
+                        DB::table('problems_users')->insert(
+                        [
+                            'userId' => $userId  ,
+                            "problemId" => $problemId,
+                            'status' => 1
+                        ]
+                        );
+                    }
                 }
             }
         }

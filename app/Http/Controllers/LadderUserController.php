@@ -4,18 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 
 class LadderUserController extends Controller
 {
     public function store($id)
     {
+        if(auth()->user()){
         DB::table('ladders_users')->insert(
             [
                     'userId' => auth()->user()->id  ,
                      "ladderId" => $id
                 ]
             );
-        return back();
+            return back();
+        }
+        else
+        {
+         
+            return Redirect::back()->withErrors(['guest' => 'You Should Sign in to Join Ladders']);
+            
+        }
     }
     public function joinedRecently()
     {

@@ -1,29 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>PMP for PS</title>
+@extends('layout.app')
+@section('content')
+<div class=" flex justify-center"> 
+    <div class="w-4/12 bg-white p-6 rounded-lg ">
+        
+        @error('guest')
+        <h3>{{ $message }}</h3>    
+        @enderror
 
-       
-    </head>
-    <body class="bg-gray-200">
-        <div>
-            <ul>
-                @foreach ($ladders as $ladder)     
-                <li>
+        <ul>
+            @foreach ($ladders as $ladder)     
+                <li class="w-full border-b-2 py-2 font-medium">
                     <a href="{{route('exploreladderid',$ladder->id) }}">{{ $ladder->name }}</a> 
                     @if($ladder->joined==0)
-                    <form method="POST" action="{{ route('joinladder',$ladder->id ) }}">
-                        @csrf
-                    <button>Join</button>    
-                    </form>   
+                        <div class="inline-block bg-green-500 py-0.25 px-2  rounded-lg justify-end">
+                            <form method="POST" action="{{ route('joinladder',$ladder->id ) }}">
+                                @csrf
+                                <button>Join</button>    
+                            </form>   
+                        </div>
                     @endif
                 </li>
-                @endforeach
-            </ul>
-            
-        </div>
-    </body>
-</html>
+            @endforeach
+        </ul>
+    </div>
+</div>
+@endsection
